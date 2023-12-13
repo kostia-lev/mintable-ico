@@ -41,10 +41,12 @@
  * https://trufflesuite.com/docs/truffle/getting-started/using-the-truffle-dashboard/
  */
 
-// require('dotenv').config();
-// const { MNEMONIC, PROJECT_ID } = process.env;
+require('dotenv').config();
+//const { MNEMONIC, PROJECT_ID } = process.env;
+const { MNEMONIC } = process.env;
+const AccountIndex = 0;
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
   /**
@@ -69,6 +71,24 @@ module.exports = {
       host: "127.0.0.1",     // Localhost (default: none)
       port: 7545,            // Standard Ethereum port (default: none)
       network_id: "5777",       // Any network (default: none)
+     },
+    ganache_local: {
+      provider: function() {
+        return new HDWalletProvider(MNEMONIC, "http://127.0.0.1:7545", AccountIndex)
+      },
+      network_id: "5777"
+     },
+    goerli_infura: {
+      provider: function() {
+        return new HDWalletProvider(MNEMONIC, "https://goerli.infura.io/v3/b2bd4d94a21246288934a86b326499f6", AccountIndex)
+      },
+      network_id: "5"
+     },
+   sepolia_infura: {
+      provider: function() {
+        return new HDWalletProvider(MNEMONIC, "https://sepolia.infura.io/v3/b2bd4d94a21246288934a86b326499f6", AccountIndex)
+      },
+      network_id: "11155111"
      },
     //
     // An additional network, but with some advanced options…
