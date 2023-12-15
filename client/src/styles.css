@@ -24,10 +24,10 @@ html {
 }
 
 #App .container {
-  width: 40%;
-  min-width: 60rem;
-  max-width: 75rem;
-  height: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 100vh;
 }
 
 code {

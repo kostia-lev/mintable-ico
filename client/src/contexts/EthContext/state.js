@@ -4,15 +4,14 @@ const actions = {
 };
 
 const initialState = {
-  // artifact: null,
   tokenInstance: null,
   tokenSaleInstance: null,
   kycInstance: null,
   web3: null,
   accounts: null,
   networkID: null,
-  loaded: null
-  // contract: null
+  loaded: false,
+  pending: false
 };
 
 const reducer = (state, action) => {
