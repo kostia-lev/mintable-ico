@@ -1,6 +1,6 @@
 # Mintable ICO
 
-All smart contracts are deployed to Sepolia. To buy tokens, you need to pass a KYC. Contact me to do it.
+All smart contracts are deployed to Sepolia. To buy tokens, you need to pass a KYC. Contact me to pass KYC. Cheers.
 
 ## Installation
 
