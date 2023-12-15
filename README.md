@@ -1,6 +1,6 @@
-# React Truffle Box
+# Mintable ICO
 
-This box comes with everything you need to start using Truffle to write, compile, test, and deploy smart contracts, and interact with them from a React app.
+All smart contracts are deployed to Sepolia. To buy tokens, you need to pass a KYC. Contact me to do it.
 
 ## Installation
 
