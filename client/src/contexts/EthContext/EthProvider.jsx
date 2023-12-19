@@ -72,14 +72,14 @@ function EthProvider({ children }) {
 
     tryInit();
   }, [init]);
-  const updateUserTokens = async () => {
+  const updateUserTokens = useCallback(async () => {
       const totalSupply =  await state.tokenInstance.methods.totalSupply().call();
       const userTokens = await state.tokenInstance.methods.balanceOf(state.accounts[0]).call();
       dispatch({
           type: actions.update,
           data: { userTokens, totalSupply }
       });
-  }
+  }, [dispatch, state])
 
   useEffect(() => {
     const events = ["chainChanged", "accountsChanged"];
@@ -97,7 +97,7 @@ function EthProvider({ children }) {
     if (state.tokenInstance) {
         state.tokenInstance.events.Transfer({to: state.accounts[0]}).on("data", updateUserTokens)
     }
-  }, [state]);
+  }, [state, updateUserTokens]);
 
   return (
     <EthContext.Provider value={{

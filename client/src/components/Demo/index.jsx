@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 import useEth from "../../contexts/EthContext/useEth";
+import {Button, Input} from '@mui/material';
+import Metamaskicon from "../../img/MetaMask_Fox.svg"
 
 
 function Demo() {
@@ -39,15 +41,16 @@ function Demo() {
     <div className="demo">
         {!loaded ? '...' : networkID === sepoliaNetoworkId ? <>
             <h2>Welcome to the {symbol} token ICO of Vahrushev Konstantin</h2>
-            <p><button disabled={!loaded || pending } onClick={addTokenToMetamask} type="button">add {symbol} to metamask</button></p>
+            <p><Button variant="contained" disabled={!loaded || pending } onClick={addTokenToMetamask}
+                       type="button"><img src={Metamaskicon} alt="Add token to Metamask" /></Button></p>
             <p>is owner: {isOwner ? 'yes' : 'no'}</p>
             <p>kyc completed: {kycCompleted ? 'yes' : 'no'}</p>
             <p style={{fontWeight: 'bold'}}>current user have: {userTokens} {symbol} </p>
             <p>total supply is: {totalSupply} {symbol} </p>
             <form>
                 Address to allow:
-                <input disabled={!isOwner} ref={kycInput} id="kycAddress"/>
-                <button disabled={!isOwner} onClick={async () => {
+                <Input className="Space" disabled={!isOwner} ref={kycInput} id="kycAddress"/>
+                <Button variant="contained"  disabled={!isOwner} onClick={async () => {
                     try {
                         await kycInstance.methods.setKycCompleted(kycInput.current.value).send({from: accounts[0]});
                     } catch (e) {
@@ -55,14 +58,14 @@ function Demo() {
                         console.log(e);
                     }
                 }} type="button">set Address for kyc
-                </button>
+                </Button>
                 <div>
                     <p>
                         Tokens to buy:
-                        <input disabled={!loaded || pending} placeholder="0" value={tokensInput}
+                        <Input className="Space" disabled={!loaded || pending} placeholder="0" value={tokensInput}
                                onChange={(e) => setTokensInput(e.target.value)} id="buyInput"/>
                     </p>
-                    <button disabled={!loaded || pending || !tokensInput } onClick={async () => {
+                    <Button variant="contained" disabled={!loaded || pending || !tokensInput } onClick={async () => {
                       updateState({pending: true});
                         try {
                           await tokenSaleInstance.methods.buyTokens(accounts[0]).send({
@@ -74,7 +77,7 @@ function Demo() {
                           updateState({pending: false});
                         }
                     }} type="button">buy tokens
-                    </button>
+                    </Button>
                 </div>
             </form>
         </> : "Please switch to Sepolia network"}
