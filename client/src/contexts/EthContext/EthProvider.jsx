@@ -38,13 +38,16 @@ function EthProvider({ children }) {
             const kycInstance = contractFactory(myKycArtifact);
             const userTokens =  await tokenInstance.methods.balanceOf(accounts[0]).call();
             const totalSupply =  await tokenInstance.methods.totalSupply().call();
+            const symbol =  await tokenInstance.methods.symbol().call();
+            const decimals =  await tokenInstance.methods.decimals().call();
+            const tokenAddress =  myTokenArtifact.networks[networkID].address;
             const isOwner =  await kycInstance.methods.owner().call() === accounts[0] ;
             const kycCompleted =  await kycInstance.methods.kycCompleted(accounts[0]).call();
 
             dispatch({
                 type: actions.init,
                 data: { tokenInstance, tokenSaleInstance, kycInstance,
-                     userTokens, kycCompleted, totalSupply, isOwner }
+                     userTokens, kycCompleted, totalSupply, isOwner, symbol, tokenAddress, decimals }
             });
         } catch (err) {
             console.error(err);
